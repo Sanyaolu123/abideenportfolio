@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 const mongoose = require("mongoose");
@@ -9,6 +10,7 @@ require("dotenv").config()
 
 mongoose.connect(process.env.MONGODB_URI)
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Welcome to abideen's Api!");
