@@ -9,6 +9,10 @@ require("dotenv").config()
 
 mongoose.connect(process.env.MONGODB_URI)
 
-app.use("/", router);
+app.get("/", (req, res) => {
+  res.send("Welcome to abideen's Api!");
+})
+
+app.use("/api", router);
 
 server.listen(process.env.PORT || 5000)
