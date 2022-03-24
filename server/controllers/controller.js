@@ -19,6 +19,8 @@ exports.AddContact = async (req, res) => {
     if(valid){
       if(message.length < 256){
         res.json({ status: 400, message: "Message is not detailed!!" })
+      }else{
+        res.json({ status: 200, message: "Success" })
       }
     }
     else{
