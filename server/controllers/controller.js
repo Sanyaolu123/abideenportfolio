@@ -6,7 +6,7 @@ async function isEmailValid(email) {
   return await emailValidator.validate(email)
  }
 
-async function saveContact(name, email, message){
+async function newContact(name, email, message){
   const saveNewContact = new saveContact({
     name: name,
     email: email,
@@ -52,7 +52,7 @@ exports.AddContact = async (req, res) => {
             
 
             try{
-              if(saveContact(name, email, message)){
+              if(newContact(name, email, message)){
                 res.json({ status: 200, message: `Your message has been submitted!!` });
               }
             }
