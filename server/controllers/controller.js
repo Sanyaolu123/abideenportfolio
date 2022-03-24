@@ -38,7 +38,7 @@ exports.AddContact = async (req, res) => {
         
         transporter.sendMail(mailOptions, function(error, info){
           if (error) {
-            res.json({ status: 400, message: "An Error Occurred!!" });
+            res.json({ status: 400, message: `${error}` });
           } else {
             res.json({ status: 200, message: `${info.response}` });
           }
