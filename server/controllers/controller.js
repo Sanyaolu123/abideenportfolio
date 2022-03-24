@@ -3,7 +3,7 @@ const emailValidator = require('deep-email-validator');
 const saveContact = require("../models/models")
 
 async function isEmailValid(email) {
-  return emailValidator.validate(email)
+  return await emailValidator.validate(email)
  }
 
 exports.AddContact = async (req, res) => {
@@ -16,7 +16,7 @@ exports.AddContact = async (req, res) => {
     res.json({ status: 400, message: "Missing Credentials!!" });
   }
   else{
-    const {valid, reason, validators} = await isEmailValid(email)
+    const {valid, reason, validators} = isEmailValid(email)
     if(valid){
       if(message.length < 20){
         res.json({ status: 400, message: "Message is not detailed!!" })
