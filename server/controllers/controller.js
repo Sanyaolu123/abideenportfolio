@@ -42,7 +42,6 @@ exports.AddContact = async (req, res) => {
             res.json({ status: 200, message: `${info.response}` });
           }
         });
-        res.json({ status: 200, message: "Success" })
       }
     }
     else{
