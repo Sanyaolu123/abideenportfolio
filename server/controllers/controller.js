@@ -44,7 +44,7 @@ exports.AddContact = async (req, res) => {
               name: name,
               email: email,
               message: message
-            })
+            });
 
             if(await saveNewContact.save()){
                res.json({ status: 200, message: `Your message has been submitted!!` });
