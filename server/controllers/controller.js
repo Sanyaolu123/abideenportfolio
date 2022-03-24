@@ -2,13 +2,18 @@ const nodemailer = require('nodemailer');
 const emailValidator = require('deep-email-validator');
 const saveContact = require("../models/models")
 
-async function process(type) {
-  if(type == "email"){
-  return await emailValidator.validate(type)
-  }else{
-    return await saveNewContact.save();
-  }
+async function isEmailValid(email) {
+  return await emailValidator.validate(email)
  }
+
+async function saveContact(name, email, message){
+  const saveNewContact = new saveContact({
+    name: name,
+    email: email,
+    message: message
+  });
+  return await saveNewContact.save()
+}
 
 exports.AddContact = async (req, res) => {
   let name = req.body.name;
@@ -20,7 +25,7 @@ exports.AddContact = async (req, res) => {
     res.json({ status: 400, message: "Missing Credentials!!" });
   }
   else{
-    const {valid, reason, validators} =  process(email)
+    const {valid, reason, validators} =  isEmailValid(email);
     if(valid){
       if(message.length < 20){
         res.json({ status: 400, message: "Message is not detailed!!" })
@@ -44,16 +49,12 @@ exports.AddContact = async (req, res) => {
           if (error) {
             res.json({ status: 400, message: `An Error Occurred` });
           } else {
-            const saveNewContact = new saveContact({
-              name: name,
-              email: email,
-              message: message
-            });
+            
 
             try{
-            if(process(save)){
-              res.json({ status: 200, message: `Your message has been submitted!!` });
-            }
+              if(saveContact(name, email, message)){
+                res.json({ status: 200, message: `Your message has been submitted!!` });
+              }
             }
             catch(error){
               res.json({ status: 400, message: `An Error Occurred` });
