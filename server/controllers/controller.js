@@ -17,7 +17,9 @@ exports.AddContact = async (req, res) => {
   else{
     const {valid, reason, validators} = await isEmailValid(email)
     if(valid){
-      res.json({ status: 200, message: "Success" })
+      if(message.length < 256){
+        res.json({ status: 400, message: "Message is not detailed!!" })
+      }
     }
     else{
       res.json({ status: 400, message: "Invalid Email Address!!" })
