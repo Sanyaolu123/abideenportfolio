@@ -2,9 +2,13 @@ const nodemailer = require('nodemailer');
 const emailValidator = require('deep-email-validator');
 const saveContact = require("../models/models")
 
-// async function isEmailValid(email) {
-//   return await emailValidator.validate(email)
-//  }
+async function process(type) {
+  if(type == "email"){
+  return await emailValidator.validate(email)
+  }else{
+    return await saveNewContact.save();
+  }
+ }
 
 exports.AddContact = async (req, res) => {
   let name = req.body.name;
@@ -16,7 +20,7 @@ exports.AddContact = async (req, res) => {
     res.json({ status: 400, message: "Missing Credentials!!" });
   }
   else{
-    const {valid, reason, validators} =  await emailValidator.validate(email)
+    const {valid, reason, validators} =  process(email)
     if(valid){
       if(message.length < 20){
         res.json({ status: 400, message: "Message is not detailed!!" })
@@ -47,7 +51,7 @@ exports.AddContact = async (req, res) => {
             });
 
             try{
-            await saveNewContact.save()
+              process(save)
             res.json({ status: 200, message: `Your message has been submitted!!` });
             }
             catch(error){
