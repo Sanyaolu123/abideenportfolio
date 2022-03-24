@@ -25,7 +25,7 @@ exports.AddContact = async (req, res) => {
     res.json({ status: 400, message: "Missing Credentials!!" });
   }
   else{
-    const {valid, reason, validators} =  isEmailValid(email);
+    const {valid, reason, validators} =  await isEmailValid(email);
     if(valid){
       if(message.length < 20){
         res.json({ status: 400, message: "Message is not detailed!!" })
