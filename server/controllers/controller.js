@@ -11,7 +11,7 @@ exports.AddContact = (req, res) => {
   let message = req.body.message;
 
   // res.send(`${name} which email is ${email} send this message: ${message}`);
-  res.status(400).send({message: "Error"})
+  if(!name || !email || !message) res.json({ status: 400, message: "Missing Credentials" });
 }
 
 
