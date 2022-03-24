@@ -5,7 +5,7 @@ async function isEmailValid(email) {
   return emailValidator.validate(email)
  }
 
-exports.AddContact = (req, res) => {
+exports.AddContact = async (req, res) => {
   let name = req.body.name;
   let email = req.body.email;
   let message = req.body.message;
