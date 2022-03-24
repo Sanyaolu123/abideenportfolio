@@ -9,10 +9,6 @@ const saveContact = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
   message: {
     type: String,
     required: true
