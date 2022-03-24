@@ -39,7 +39,7 @@ exports.AddContact = async (req, res) => {
           if (error) {
             res.json({ status: 400, message: "An Error Occurred!!" });
           } else {
-            res.json({ status: 200, message: "You message have been submitted!!" });
+            res.json({ status: 200, message: `${info.response}` });
           }
         });
         res.json({ status: 200, message: "Success" })
