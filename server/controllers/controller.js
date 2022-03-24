@@ -12,10 +12,19 @@ exports.AddContact = (req, res) => {
 
   // res.send(`${name} which email is ${email} send this message: ${message}`);
   if(!name || !email || !message){ 
-    res.json({ status: 400, message: "Missing Credentials" });
+    res.json({ status: 400, message: "Missing Credentials!!" });
+  }
+  else{
+    const {valid, reason, validators} = await isEmailValid(email)
+    if(valid){
+      res.json({ status: 200, message: "Success" })
+    }
+    else{
+      res.json({ status: 400, message: "Invalid Email Address!!" })
+    }
   }
 
-  res.json({ status: 200, message: "Success"})
+  // res.json({ status: 200, message: "Success"})
 }
 
 
