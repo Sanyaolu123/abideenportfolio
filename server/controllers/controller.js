@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const emailValidator = require('deep-email-validator');
-
+const saveContact = require("../models/models")
 
 async function isEmailValid(email) {
   return emailValidator.validate(email)
@@ -40,7 +40,14 @@ exports.AddContact = async (req, res) => {
           if (error) {
             res.json({ status: 400, message: `An Error Occurred` });
           } else {
-            res.json({ status: 200, message: `Your message has been submitted!!` });
+            const saveNewContact = new saveContact({
+              name: name,
+              email: email,
+              message: message,
+            })
+
+            if(await saveNewContact.save()) res.json({ status: 200, message: `Your message has been submitted!!` });
+            res.json({ status: 400, message: `An Error Occurred` });
           }
         });
       }
