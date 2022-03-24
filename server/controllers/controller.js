@@ -17,9 +17,31 @@ exports.AddContact = async (req, res) => {
   else{
     const {valid, reason, validators} = await isEmailValid(email)
     if(valid){
-      if(message.length < 256){
+      if(message.length < 20){
         res.json({ status: 400, message: "Message is not detailed!!" })
       }else{
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: `${process.env.EMAIL}`,
+            pass: `${process.env.EMAIL_PASS}`
+          }
+        });
+        
+        var mailOptions = {
+          from: `${process.env.EMAIL}`,
+          to: `${email}`,
+          subject: 'You have contacted Abideen Sanyaolu',
+          text: 'I will get back to you concerning your messsage in due times'
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            res.json({ status: 400, message: "An Error Occurred!!" });
+          } else {
+            res.json({ status: 200, message: "You message have been submitted!!" });
+          }
+        });
         res.json({ status: 200, message: "Success" })
       }
     }
@@ -33,25 +55,3 @@ exports.AddContact = async (req, res) => {
 
 
 
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: `${process.env.EMAIL}`,
-//     pass: `${process.env.EMAIL_PASS}`
-//   }
-// });
-
-// var mailOptions = {
-//   from: 'youremail@gmail.com',
-//   to: 'myfriend@yahoo.com',
-//   subject: 'Sending Email using Node.js',
-//   text: 'That was easy!'
-// };
-
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
