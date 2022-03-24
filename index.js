@@ -8,7 +8,7 @@ const router = require("./server/routers/routes");
 
 require("dotenv").config()
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
