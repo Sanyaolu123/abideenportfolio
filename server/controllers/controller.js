@@ -30,10 +30,10 @@ exports.AddContact = async (req, res) => {
         });
         
         var mailOptions = {
-          from: `${process.env.EMAIL}`,
-          to: `${email}`,
+          from: `Abideen Portfolio <${process.env.EMAIL}>`,
+          to: `Abideen Portfolio ${email}`,
           subject: 'You have contacted Abideen Sanyaolu',
-          text: 'I will get back to you concerning your messsage in due times'
+          html: '<h3>I will get back to you concerning your messsage in due times</h3><br /><p>You can find my number on the portfolio <a href="abideenportfolio.infinityfreeapp.com">Abideen\'s Portfolio</a></p>'
         };
         
         transporter.sendMail(mailOptions, function(error, info){
