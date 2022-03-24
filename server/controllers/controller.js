@@ -30,17 +30,17 @@ exports.AddContact = async (req, res) => {
         });
         
         var mailOptions = {
-          from: `Abideen Portfolio <${process.env.EMAIL}>`,
-          to: `Abideen Portfolio ${email}`,
+          from: `Abideen's Portfolio <${process.env.EMAIL}>`,
+          to: `Abideen's Portfolio ${email}`,
           subject: 'You have contacted Abideen Sanyaolu',
-          html: '<h3>I will get back to you concerning your messsage in due times</h3><br /><p>You can find my number on the portfolio <a href="abideenportfolio.infinityfreeapp.com">Abideen\'s Portfolio</a></p>'
+          html: '<h2 style="text-align:center;">I will get back to you concerning your messsage in due times</h2><p style="text-align:center;">You can find my number on the portfolio <a href="abideenportfolio.infinityfreeapp.com">Abideen\'s Portfolio</a></p>'
         };
         
         transporter.sendMail(mailOptions, function(error, info){
           if (error) {
-            res.json({ status: 400, message: `${process.env.EMAIL, process.env.EMAIL_PASS}` });
+            res.json({ status: 400, message: `An Error Occurred` });
           } else {
-            res.json({ status: 200, message: `${info.response}` });
+            res.json({ status: 200, message: `Your message has been submitted!!` });
           }
         });
       }
