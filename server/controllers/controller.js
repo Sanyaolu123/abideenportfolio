@@ -43,7 +43,7 @@ exports.AddContact = async (req, res) => {
             const saveNewContact = new saveContact({
               name: name,
               email: email,
-              message: message,
+              message: message
             })
 
             if(await saveNewContact.save()){
