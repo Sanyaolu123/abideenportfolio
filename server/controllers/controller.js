@@ -4,7 +4,7 @@ const saveContact = require("../models/models")
 
 async function process(type) {
   if(type == "email"){
-  return await emailValidator.validate(email)
+  return await emailValidator.validate(type)
   }else{
     return await saveNewContact.save();
   }
