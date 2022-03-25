@@ -40,7 +40,7 @@ exports.AddContact = async (req, res) => {
         
         var mailOptions = {
           from: `Abideen's Portfolio <${process.env.EMAIL}>`,
-          to: `Abideen's Portfolio ${email}`,
+          to: `${name} ${email}`,
           subject: 'You have contacted Abideen Sanyaolu',
           html: '<h2 style="text-align:center;">I will get back to you concerning your messsage in due times</h2><p style="text-align:center;">You can find my number on the portfolio <a href="abideenportfolio.infinityfreeapp.com">Abideen\'s Portfolio</a></p>'
         };
