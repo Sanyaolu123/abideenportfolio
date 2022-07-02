@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require('body-parser');
 const app = express();
 
 const mongoose = require("mongoose");
@@ -11,6 +12,7 @@ require("dotenv").config()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(cors());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Welcome to abideen's Api!");
