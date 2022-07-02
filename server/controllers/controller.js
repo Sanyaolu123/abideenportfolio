@@ -16,9 +16,8 @@ async function newContact(name, email, message){
 }
 
 exports.AddContact = async (req, res) => {
-  let name = req.body.name;
-  let email = req.body.email;
-  let message = req.body.message;
+  
+  let { name, email, message } = req.body; 
 
   // res.send(`${name} which email is ${email} send this message: ${message}`);
   if(!name || !email || !message){ 
